@@ -1,0 +1,180 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Project api",
+    "description": "Project api",
+    "version": "1.0.0"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "host": "localhost:3000",
+  "basePath": "/",
+  "paths": {
+    "/user/register": {
+      "post": {
+        "summary": "user register ",
+        "operationId": "postUserRegister",
+        "description": "sign up api",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "firstName",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "lastName",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "email",
+            "x-format": {
+              "email": true
+            },
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "password",
+            "in": "formData",
+            "required": true
+          }
+        ],
+        "tags": [
+          "user"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Data Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user/verifyEmail": {
+      "get": {
+        "summary": "verify email users",
+        "operationId": "UserVerifyEmail",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "verifyEmailToken",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "tags": [
+          "user"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "summary": "Login for users",
+        "operationId": "postUserLogin",
+        "parameters": [
+          {
+            "type": "string",
+            "x-format": {
+              "email": true
+            },
+            "name": "email",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "password",
+            "in": "formData",
+            "required": true
+          },
+          {
+            "type": "string",
+            "name": "deviceToken",
+            "in": "formData",
+            "required": false
+          },
+          {
+            "type": "string",
+            "name": "deviceType",
+            "enum": ["ANDROID","IOS","WEB"],
+            "in": "formData",
+            "required": false
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "tags": [
+          "user"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    },
+    "/user/getProfile": {
+      "get": {
+        "summary": "profile users",
+        "operationId": "getProfile",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "authorization",
+            "in": "header",
+            "required": true
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "tags": [
+          "user"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    }
+  }
+}
